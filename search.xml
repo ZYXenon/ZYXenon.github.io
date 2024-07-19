@@ -1,26 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/project/2024/07/10/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title></title>
+    <url>/project/2024/07/19/win11%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<p>想新建一个markdown文件，右击新建却没找到md类型。。。</p>
+<p>想起了之前学汇编每次新建程序都是先把老师发的asm文件复制一份然后删掉内容，<del>简直是扛着自行车跑步上学</del></p>
+<p>我真傻，真的（</p>
+<p>不能再用这种笨方法了，遂上网查了查怎么解决，在这里总结一下</p>
+<h4 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h4><ol>
+<li><p>win + R 输入regedit，打开注册表</p>
+</li>
+<li><p>在注册表左侧列表中找到HKEY_CLASSES_ROOT&#x2F;.md （.md就是你要添加的文件类型后缀名），右击依次点击 “ 新建 ”、“ 项 ” ，命名为ShellNew，如图所示</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\adolph\mark\image-20240719094910400.png"
+                      alt="image-20240719094910400"
+                ></p>
+</li>
+<li><p>打开新建的ShellNew文件夹, 在右侧右击新建字符串值，命名为NullFile，如图</p>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\adolph\mark\image-20240719094934132.png"
+                      alt="image-20240719094934132"
+                ></p>
+</li>
+<li><p>在左侧列表找到HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer位置，右击新建项，命名为NamingTemplates</p>
+</li>
+<li><p>在右侧新建字符串值，命名为RenameNameTemplate，“数据”一栏即为新建的文件初始名，可自行修改，如图</p>
+</li>
+</ol>
+<p><img  
+                     lazyload
+                     src="/images/loading.svg"
+                     data-src="D:\adolph\mark\image-20240719095907228.png"
+                      alt="image-20240719095907228"
+                ></p>
+<ol start="6">
+<li>大功告成！</li>
+</ol>
+<p>（ps. 我到这一步时回到桌面发现新建里还是没有那个文件类型，但重启电脑后就有了）</p>
+<h4 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h4><p>上述方法据说有时候会失败（虽然我没遇到过），因为没有指定打开该文件的程序。可以尝试第二种方法，<u>注意需要开启显示文件后缀名</u></p>
+<ol>
+<li><p>在桌面新建文本文档，输入以下内容并保存</p>
+<div class="highlight-container" data-rel="Plaintext"><figure class="iseeu highlight plaintext"><table><tr><td class="code"><pre><span class="line">Windows Registry Editor Version 5.00</span><br><span class="line">[HKEY_CLASSES_ROOT\.md]</span><br><span class="line">@=&quot;Typora.exe&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\.md\ShellNew]</span><br><span class="line">&quot;NullFile&quot;=&quot;&quot;</span><br><span class="line">[HKEY_CLASSES_ROOT\Typora.exe]</span><br><span class="line">@=&quot;新建md文件&quot;</span><br></pre></td></tr></table></figure></div></li>
+</ol>
+<p>​	代码中“.md”可以换为自己想添加的文件类型后缀，Typora可以换为打开这种文件的软件，最后一行引号里的是新建文件的初始名</p>
+<ol start="2">
+<li>关闭文档，将后缀名改为.reg并双击打开，依次点击“是” “确定” 即可</li>
+</ol>
 ]]></content>
-  </entry>
-  <entry>
-    <title>man! what can i say!</title>
-    <url>/project/2024/07/11/title%E2%80%9D/</url>
-    <content><![CDATA[]]></content>
   </entry>
 </search>
