@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            归档
+            递归
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -32,15 +32,32 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
     <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/archive.css">
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
 <div id="header" class="header">
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-subtitle">归档</h1>
+                <h1 class="header-subtitle">递归</h1>
                 <div class="header-subinfo">
-                    <p class="article-info-text Chinese"></p>
-                    <p class="article-info-text English"></p>                  
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-01-12
+                        </span>
+                        
+                            
+                                <span id="/2025/01/12/递归/" class="leancloud_visitors" data-flag-title="递归">
+                                    <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/12/递归/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                    
                 </div>
             
         </div>
@@ -49,37 +66,97 @@
 </div>
 <div id="container">
     
-        
-            <!-- 归档页面、分类归档页面、标签归档页面 -->
-            <div class="articles">
-                <div class="articles-wrap">
-                    <span class="archive-move-on"></span>
-                    <span class="archive-counter">
-                        
-                            目前共计 1 篇日志，继续加油！
-                        
-                    </span>
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h2 id="递归函数（recursive-functions）"><a href="#递归函数（recursive-functions）" class="headerlink" title="递归函数（recursive functions）"></a>递归函数（recursive functions）</h2><p>递归就是函数自己调用自己。</p>
+<p>如果一个问题可以分解成与原始问题类似的、更小的问题，可以考虑使用<strong>递归</strong>方法。这里的“更小”，可以理解为同一个问题中参数位于序列更靠前位置的情况，或者可以类比为递推序列，即序列中初始项以外任意一项可以用前面几项来推出。</p>
+<p>设计递归函数时，首先要明确**<u>递推关系</u><strong>和</strong><u>终止条件</u>**</p>
+<blockquote>
+<p>example question:</p>
+<p>The number of partitions of a positive integer <code>n</code>, using parts up to size <code>m</code>, is the number of ways in which <code>n</code> can be expressed as the sum of positive integer parts up to <code>m</code> in increasing order. For example, the number of partitions of 3 using parts up to 2 is 2.</p>
+<p>3 &#x3D; 1 + 1 + 1</p>
+<p>3 &#x3D; 1 + 2</p>
+<p>Define a function <code>count_partitions(n, m)</code> that returns the number of different partitions of <code>n</code> using parts up to <code>m</code></p>
+</blockquote>
+<p>分析：n在最大加数为m时的拆分方式可以分为两种情况：</p>
+<p>（1）包含m（2）不包含m</p>
+<p>前者可以转化为count_partitions(n-m, m)，即去掉一个m</p>
+<p>后者可以转化为count_partition(n, m-1)，因为没有m</p>
+<p>都是同一问题的更小参数情况，故可考虑递归</p>
+<p>注意终止（边界）条件：n&#x3D;&#x3D;0时只有一种拆分情况，n&lt;0或m&#x3D;0时无法拆</p>
+<p>故函数可写为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">count_partitions</span>(<span class="params">n, m</span>):</span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>：</span><br><span class="line">    	<span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">elif</span> n &lt; <span class="number">0</span> <span class="keyword">or</span> m == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">return</span> count_partitions(n - m, m) + count_partitions(n, m - <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>类似还有一题：</p>
+<blockquote>
+<p>Given a positive integer <code>total</code>, a set of dollar bills makes change for <code>total</code> if the sum of the values of the dollar bills is <code>total</code>. Here we will use standard US dollar bill values: 1, 5, 10, 20, 50, and 100. For example, the following sets make change for <code>15</code>:</p>
+<ul>
+<li>15 1-dollar bills</li>
+<li>10 1-dollar, 1 5-dollar bills</li>
+<li>5 1-dollar, 2 5-dollar bills</li>
+<li>5 1-dollar, 1 10-dollar bills</li>
+<li>3 5-dollar bills</li>
+<li>1 5-dollar, 1 10-dollar bills</li>
+</ul>
+<p>Thus, there are 6 ways to make change for <code>15</code>. Write a <strong>recursive</strong> function <code>count_dollars</code> that takes a positive integer <code>total</code> and returns the number of ways to make change for <code>total</code> using 1, 5, 10, 20, 50, and 100 dollar bills.</p>
+<p>Use <code>next_smaller_dollar</code> in your solution: <code>next_smaller_dollar</code> will return the next smaller dollar bill value from the input (e.g. <code>next_smaller_dollar(5)</code> is <code>1</code>). <em>The function will return <code>None</code> if the next dollar bill value does not exist.</em></p>
+<p>ps: <code>next_smaller_dollar</code>已经写好，只需写<code>count_dollars</code></p>
+</blockquote>
+<p>思路与上题非常相似</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">next_smaller_dollar</span>(<span class="params">bill</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Returns the next smaller bill in order.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> bill == <span class="number">100</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">50</span></span><br><span class="line">    <span class="keyword">if</span> bill == <span class="number">50</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">20</span></span><br><span class="line">    <span class="keyword">if</span> bill == <span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count_dollars</span>(<span class="params">total</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">helper</span>(<span class="params">total, bill</span>):</span><br><span class="line">        <span class="keyword">if</span> total == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> total &lt; <span class="number">0</span> <span class="keyword">or</span> bill == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> helper(total - bill, bill) + helper(total, next_smaller_dollar(bill))</span><br><span class="line">    <span class="keyword">return</span> helper(total, <span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+
+<p>还可以用<code>next_larger_dollar</code>:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">next_larger_dollar</span>(<span class="params">bill</span>):</span><br><span class="line">    <span class="keyword">if</span> bill == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">5</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">5</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">10</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">10</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">20</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">20</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">50</span></span><br><span class="line">    <span class="keyword">elif</span> bill == <span class="number">50</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count_dollars_upward</span>(<span class="params">total</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">helper</span>(<span class="params">total, bill</span>):</span><br><span class="line">        <span class="keyword">if</span> total == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">elif</span> total &lt; <span class="number">0</span> <span class="keyword">or</span> bill == <span class="literal">None</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> helper(total - bill, bill) + helper(total, next_larger_dollar(bill))</span><br><span class="line">    <span class="keyword">return</span> helper(total, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/avatar.jpg" alt="ZYXenon">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>ZYXenon
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="/2025/01/12/%E9%80%92%E5%BD%92/" target="_blank">递归</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>简单地活着, 肆意又精彩.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                
+                <div class="article-prev-next">
                     
+                        <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" class="prev-prefix">« </a> 上一篇：    <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" title="发布于 2025-01-13 02:01">数据抽象</a>
+                        <br>
                     
-                        
-                            <div class="archive-title">
-                                <h2 class="archive-year">2024</h2>
-                            </div>
-                            
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/project/2024/12/29/hello-world/"><span>Hello World</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">12-29</span>
-                                </div>
-                            </div>
-                        </div>
                     
                 </div>
             </div>
             
+    <div class="article-comments">
         
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+ 
+        </div>
     
 </div>
     <div id="footer">
@@ -117,7 +194,7 @@
                     
                         <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
                     
-                        <li class=" active "><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
                     
                         <li class=""><a href="/donate" class="" target="_self"><span class="iconfont icon-heart-fill"></span>赞赏</a></li>
                     
@@ -324,8 +401,6 @@
         },
 
         HomeHeaderImage : [
-            
-                "/image/header/home.jpg",
             
                 "/image/header/home.jpeg",
             

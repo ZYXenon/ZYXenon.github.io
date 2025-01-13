@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            归档
+            数据抽象
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -32,15 +32,32 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
     <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/archive.css">
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
 <div id="header" class="header">
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-subtitle">归档</h1>
+                <h1 class="header-subtitle">数据抽象</h1>
                 <div class="header-subinfo">
-                    <p class="article-info-text Chinese"></p>
-                    <p class="article-info-text English"></p>                  
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-01-13
+                        </span>
+                        
+                            
+                                <span id="/2025/01/13/数据抽象/" class="leancloud_visitors" data-flag-title="数据抽象">
+                                    <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/13/数据抽象/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                    
                 </div>
             
         </div>
@@ -49,47 +66,100 @@
 </div>
 <div id="container">
     
-        
-            <!-- 归档页面、分类归档页面、标签归档页面 -->
-            <div class="articles">
-                <div class="articles-wrap">
-                    <span class="archive-move-on"></span>
-                    <span class="archive-counter">
-                        
-                            目前共计 2 篇日志，继续加油！
-                        
-                    </span>
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h2 id="数据抽象"><a href="#数据抽象" class="headerlink" title="数据抽象"></a>数据抽象</h2><p>数据抽象是一种设计方法，通过将数据的<u>表示方式</u>与数据的<u>操作方式</u>分离，提升程序的模块化，使其更易于设计、维护和修改。</p>
+<p>将数据类型作为程序的独立部分定义</p>
+<p>将数据的表示方式和操作运算分离，可以方便设计</p>
+<p>设计数据的操作方式时可以不用考虑数据表示的具体实现，只需以尽可能少的关于数据的假设来使用数据，通过一组函数来将抽象数据与具体表示联系起来</p>
+<h4 id="案例：有理数"><a href="#案例：有理数" class="headerlink" title="案例：有理数"></a>案例：有理数</h4><p>假设有理数数据类型有以下函数可以使用：</p>
+<ul>
+<li><code>rational(n, d)</code> returns the rational number with numerator <code>n</code> and denominator <code>d</code>.</li>
+<li><code>numer(x)</code> returns the numerator of the rational number <code>x</code>.</li>
+<li><code>denom(x)</code> returns the denominator of the rational number <code>x</code>.</li>
+</ul>
+<p>在上述假设下，可以设计以下操作：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_rationals</span>(<span class="params">x, y</span>):</span><br><span class="line">    nx, dx = numer(x), denom(x)</span><br><span class="line">    ny, dy = numer(y), denom(y)</span><br><span class="line">    <span class="keyword">return</span> rational(nx * dy + ny * dx, dx * dy)</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mul_rationals</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> rational(numer(x) * numer(y), denom(x) * denom(y))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_rational</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="built_in">print</span>(numer(x), <span class="string">&#x27;/&#x27;</span>, denom(x))</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rationals_are_equal</span>(<span class="params">x, y</span>):</span><br><span class="line">    <span class="keyword">return</span> numer(x) * denom(y) == numer(y) * denom(x)</span><br></pre></td></tr></table></figure>
+
+<p>数据表示具体实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> gcd</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rational</span>(<span class="params">n, d</span>):</span><br><span class="line">	g = gcd(n, d)</span><br><span class="line">	<span class="keyword">return</span> [n//g, d//g]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">numer</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">0</span>]</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">denom</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> x[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h4 id="分层设计与抽象屏障"><a href="#分层设计与抽象屏障" class="headerlink" title="分层设计与抽象屏障"></a>分层设计与抽象屏障</h4><p>通过限制程序不同部分只能使用特定级别的操作，确保数据表示与数据操作的底层实现相分离</p>
+<p>还是以前面有理数数据为例：</p>
+<table>
+<thead>
+<tr>
+<th>Parts of the program that…</th>
+<th>Treat rationals as…</th>
+<th>Using only…</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Use rational numbers to perform computation</td>
+<td>whole data values</td>
+<td>add_rational, mul_rational, rationals_are_equal, print_rational</td>
+</tr>
+<tr>
+<td>Create rationals or implement rational operations</td>
+<td>numerators and denominators</td>
+<td>rational, numer, denom</td>
+</tr>
+<tr>
+<td>Implement selectors and constructor for rationals</td>
+<td>two-element lists</td>
+<td>list literals and element selection</td>
+</tr>
+</tbody></table>
+<p>每层函数由高层函数调用，并使用低层函数实现</p>
+<p>高层函数调用低层函数，但不关心其具体实现</p>
+<p>这样设计的好处是当低层抽象的实现方式发生变化时，高层抽象不会受到影响。提高代码的鲁棒性和可扩展性</p>
+<p>如果程序某部分可以使用高层函数，却直接调用了更低层的函数，就会违反抽象屏障（abstraction barrier），例如<code>square_rational</code>函数可以通过调用<code>mul_rational</code>来计算平方，这样只与<code>mul_rational</code>有关而不关心有理数数据的内部具体实现。但如果使用<code>return rational(numer(x) * numer(x), denom(x) * denom(x))</code>来实现而绕过高层函数时，就会破坏抽象屏障，此时如果低层数据实现发生变化，该函数可能无法正常运行</p>
+
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/avatar.jpg" alt="ZYXenon">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>ZYXenon
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" target="_blank">数据抽象</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>简单地活着, 肆意又精彩.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                
+                <div class="article-prev-next">
                     
                     
-                        
-                            <div class="archive-title">
-                                <h2 class="archive-year">2025</h2>
-                            </div>
-                            
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/"><span>数据抽象</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">01-13</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2025/01/12/%E9%80%92%E5%BD%92/"><span>递归</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">01-12</span>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/2025/01/12/%E9%80%92%E5%BD%92/" class="next-prefix">» </a> 下一篇：    <a href="/2025/01/12/%E9%80%92%E5%BD%92/" title="发布于 2025-01-12 08:23">递归</a>
                     
                 </div>
             </div>
             
+    <div class="article-comments">
         
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+ 
+        </div>
     
 </div>
     <div id="footer">
@@ -127,7 +197,7 @@
                     
                         <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
                     
-                        <li class=" active "><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
                     
                         <li class=""><a href="/donate" class="" target="_self"><span class="iconfont icon-heart-fill"></span>赞赏</a></li>
                     
