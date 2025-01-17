@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            归档
+            树和链表的python实现
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -32,15 +32,36 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
     <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/archive.css">
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
 <div id="header" class="header">
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-subtitle">归档</h1>
+                <h1 class="header-subtitle">树和链表的python实现</h1>
                 <div class="header-subinfo">
-                    <p class="article-info-text Chinese"></p>
-                    <p class="article-info-text English"></p>                  
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-01-17
+                        </span>
+                        
+                            
+                                <span id="/2025/01/17/树和链表的python实现/" class="leancloud_visitors" data-flag-title="树和链表的python实现">
+                                    <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/17/树和链表的python实现/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                    
+                        
+                            <span class="tag-color">编程</span>
+                        
+                    
                 </div>
             
         </div>
@@ -49,57 +70,84 @@
 </div>
 <div id="container">
     
-        
-            <!-- 归档页面、分类归档页面、标签归档页面 -->
-            <div class="articles">
-                <div class="articles-wrap">
-                    <span class="archive-move-on"></span>
-                    <span class="archive-counter">
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h3 id="树（Tree）"><a href="#树（Tree）" class="headerlink" title="树（Tree）"></a>树（Tree）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">root_label, branches=[]</span>):</span><br><span class="line">    <span class="keyword">for</span> branch <span class="keyword">in</span> branches:</span><br><span class="line">        <span class="keyword">assert</span> is_tree(branch), <span class="string">&#x27;branches must be trees&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> [root_label] + <span class="built_in">list</span>(branches)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">label</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">branches</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_tree</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(tree) != <span class="built_in">list</span> <span class="keyword">or</span> <span class="built_in">len</span>(tree) &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> branches <span class="keyword">in</span> branches(tree):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_tree(branch):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_leaf</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> branches(tree)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count_leaves</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        branch_counts = [count_leaves(b) <span class="keyword">for</span> b <span class="keyword">in</span> branches(tree)]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(branch_counts)</span><br></pre></td></tr></table></figure>
+
+<p>例一：</p>
+<blockquote>
+<p><strong>Partition trees.</strong> Trees can also be used to represent the partitions of an integer. A partition tree for <code>n</code> using parts up to size <code>m</code> is a binary (two branch) tree that represents the choices taken during computation. In a non-leaf partition tree:</p>
+<ul>
+<li>the left (index 0) branch contains all ways of partitioning <code>n</code> using at least one <code>m</code>,</li>
+<li>the right (index 1) branch contains partitions using parts up to <code>m-1</code>, and</li>
+<li>the root label is <code>m</code>.</li>
+</ul>
+<p>The labels at the leaves of a partition tree express whether the path from the root of the tree to the leaf represents a successful partition of <code>n</code>.</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">partition_tree</span>(<span class="params">n, m</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a partition tree of n using parts of up to m.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> tree(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> n &lt; <span class="number">0</span> <span class="keyword">or</span> m == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> tree(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        left = partition_tree(n-m, m)</span><br><span class="line">        right = partition_tree(n, m-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> tree(m, [left, right])</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; partition_tree(2, 2)</span></span><br><span class="line"><span class="string">    [2, [True], [1, [1, [True], [False]], [False]]]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_parts</span>(<span class="params">tree, partition=[]</span>):</span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">if</span> label(tree):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27; + &#x27;</span>.join(partition))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        left, right = branches(tree)</span><br><span class="line">        m = <span class="built_in">str</span>(label(tree))</span><br><span class="line">        print_parts(left, partition + [m])</span><br><span class="line">        print_parts(right, partition)</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print_parts(partition_tree(6, 4))</span></span><br><span class="line"><span class="string">    4 + 2</span></span><br><span class="line"><span class="string">    4 + 1 + 1</span></span><br><span class="line"><span class="string">    3 + 3</span></span><br><span class="line"><span class="string">    3 + 2 + 1</span></span><br><span class="line"><span class="string">    3 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    2 + 2 + 2</span></span><br><span class="line"><span class="string">    2 + 2 + 1 + 1</span></span><br><span class="line"><span class="string">    2 + 1 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    1 + 1 + 1 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>例二：转换为二叉树的一种方式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">right_binarize</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Construct a right-branching binary tree.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">return</span> tree</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(tree) &gt; <span class="number">2</span>:</span><br><span class="line">        tree = [tree[<span class="number">0</span>], tree[<span class="number">1</span>:]]</span><br><span class="line">    <span class="keyword">return</span> [right_binarize(b) <span class="keyword">for</span> b <span class="keyword">in</span> tree]</span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	&gt;&gt;&gt; right_binarize([1, 2, 3, 4, 5, 6, 7])</span></span><br><span class="line"><span class="string">	[1, [2, [3, [4, [5, [6, 7]]]]]]</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="链表（linked-list）"><a href="#链表（linked-list）" class="headerlink" title="链表（linked list）"></a>链表（linked list）</h3><blockquote>
+<p>例：four &#x3D; [1, [2, [3, [4, ‘empty’]]]]      列表第一项是内容，第二项指向下一个元素</p>
+</blockquote>
+<p>实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">empty = <span class="string">&#x27;empty&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_link</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;s is a linked list if it is empty or a (first, rest) pair.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s == empty <span class="keyword">or</span> (<span class="built_in">len</span>(s) == <span class="number">2</span> <span class="keyword">and</span> is_link(s[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">link</span>(<span class="params">first, rest</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Construct a linked list from its first element and the rest.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(rest), <span class="string">&quot;rest must be a linked list.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> [first, rest]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">first</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the first element of a linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(s), <span class="string">&quot;first only applies to linked lists.&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> s != empty, <span class="string">&quot;empty linked list has no first element.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rest</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the rest of the elements of a linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(s), <span class="string">&quot;rest only applies to linked lists.&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> s != empty, <span class="string">&quot;empty linked list has no rest.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">len_link</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the length of linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> s != empty:</span><br><span class="line">        s, length = rest(s), length + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> length</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getitem_link</span>(<span class="params">s, i</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the element at index i of linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">        s, i = rest(s), i - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> first(s)</span><br></pre></td></tr></table></figure>
+
+
+                
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/logo.jpg" alt="ZYXenon">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>ZYXenon
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/" target="_blank">树和链表的python实现</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>简单地活着, 肆意又精彩.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+                
+                
+                    <div class="tag">
+                        标签：
                         
-                            目前共计 3 篇日志，继续加油！
+                            <a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
                         
-                    </span>
+                    </div>
+                
+                <div class="article-prev-next">
                     
                     
-                        
-                            <div class="archive-title">
-                                <h2 class="archive-year">2025</h2>
-                            </div>
-                            
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/"><span>树和链表的python实现</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">01-17</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/"><span>数据抽象</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">01-13</span>
-                                </div>
-                            </div>
-                        </div>
-                    
-                           
-                        <div class="article">
-                            <div class="article-header">
-                                <h1 class="article-title"><a href="/2025/01/12/%E9%80%92%E5%BD%92/"><span>递归</span></a></h1>
-                                <div class="article-meta">
-                                    <span class="article-time">01-12</span>
-                                </div>
-                            </div>
-                        </div>
+                        <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" class="next-prefix">» </a> 下一篇：    <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" title="发布于 2025-01-13 02:01">数据抽象</a>
                     
                 </div>
             </div>
             
+    <div class="article-comments">
         
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+ 
+        </div>
     
 </div>
     <div id="footer">
@@ -137,7 +185,7 @@
                     
                         <li class=""><a href="/tag" class="" target="_self"><span class="iconfont icon-discount-fill"></span>标签</a></li>
                     
-                        <li class=" active "><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
+                        <li class=""><a href="/archive" class="" target="_self"><span class="iconfont icon-calendar-fill"></span>归档</a></li>
                     
                         <li class=""><a href="/donate" class="" target="_self"><span class="iconfont icon-heart-fill"></span>赞赏</a></li>
                     
