@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            树和链表的python实现
+            格式化输出
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -37,30 +37,26 @@
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-subtitle">树和链表的python实现</h1>
+                <h1 class="header-subtitle">格式化输出</h1>
                 <div class="header-subinfo">
                     <p class="article-info-text">
                         <span>
-                            <i class="iconfont icon-time"></i> 发表时间：2025-01-17
+                            <i class="iconfont icon-time"></i> 发表时间：2025-01-31
                         </span>
                         
                             
-                                <span id="/2025/01/17/树和链表的python实现/" class="leancloud_visitors" data-flag-title="树和链表的python实现">
+                                <span id="/2025/01/31/格式化输出/" class="leancloud_visitors" data-flag-title="格式化输出">
                                     <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
                                 </span>
                             
                             
                                 <span>
-                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/17/树和链表的python实现/"></span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/31/格式化输出/"></span>
                                 </span>
                               
                         
                     </p>
                     
-                    
-                        
-                            <span class="tag-color">编程</span>
-                        
                     
                 </div>
             
@@ -74,28 +70,156 @@
         <div id="article">
             <div class="toc"></div>
             <div class="article-body">
-                <h3 id="树（Tree）"><a href="#树（Tree）" class="headerlink" title="树（Tree）"></a>树（Tree）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>(<span class="params">root_label, branches=[]</span>):</span><br><span class="line">    <span class="keyword">for</span> branch <span class="keyword">in</span> branches:</span><br><span class="line">        <span class="keyword">assert</span> is_tree(branch), <span class="string">&#x27;branches must be trees&#x27;</span></span><br><span class="line">    <span class="keyword">return</span> [root_label] + <span class="built_in">list</span>(branches)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">label</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">branches</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> tree[<span class="number">1</span>:]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_tree</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span>(tree) != <span class="built_in">list</span> <span class="keyword">or</span> <span class="built_in">len</span>(tree) &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">for</span> branches <span class="keyword">in</span> branches(tree):</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> is_tree(branch):</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_leaf</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">not</span> branches(tree)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">count_leaves</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        branch_counts = [count_leaves(b) <span class="keyword">for</span> b <span class="keyword">in</span> branches(tree)]</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">sum</span>(branch_counts)</span><br></pre></td></tr></table></figure>
-
-<p>例一：</p>
-<blockquote>
-<p><strong>Partition trees.</strong> Trees can also be used to represent the partitions of an integer. A partition tree for <code>n</code> using parts up to size <code>m</code> is a binary (two branch) tree that represents the choices taken during computation. In a non-leaf partition tree:</p>
+                <h2 id="格式化输出"><a href="#格式化输出" class="headerlink" title="格式化输出"></a>格式化输出</h2><p>有三种方法：</p>
 <ul>
-<li>the left (index 0) branch contains all ways of partitioning <code>n</code> using at least one <code>m</code>,</li>
-<li>the right (index 1) branch contains partitions using parts up to <code>m-1</code>, and</li>
-<li>the root label is <code>m</code>.</li>
+<li>占位符%</li>
+<li>format</li>
+<li>f表达式</li>
 </ul>
-<p>The labels at the leaves of a partition tree express whether the path from the root of the tree to the leaf represents a successful partition of <code>n</code>.</p>
+<h4 id="1-占位符"><a href="#1-占位符" class="headerlink" title="1. %占位符"></a>1. %占位符</h4><p>%s 字符串（str()转换任何对象成字符串）</p>
+<p>%d 十进制整数</p>
+<p>%f 十进制小数，默认保留六位小数</p>
+<blockquote>
+<p>语法格式：”… %[key][flags][width][.precision][length type]conversion type …” values</p>
 </blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">partition_tree</span>(<span class="params">n, m</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return a partition tree of n using parts of up to m.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> tree(<span class="literal">True</span>)</span><br><span class="line">    <span class="keyword">elif</span> n &lt; <span class="number">0</span> <span class="keyword">or</span> m == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> tree(<span class="literal">False</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        left = partition_tree(n-m, m)</span><br><span class="line">        right = partition_tree(n, m-<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> tree(m, [left, right])</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; partition_tree(2, 2)</span></span><br><span class="line"><span class="string">    [2, [True], [1, [1, [True], [False]], [False]]]</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">print_parts</span>(<span class="params">tree, partition=[]</span>):</span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">if</span> label(tree):</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27; + &#x27;</span>.join(partition))</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        left, right = branches(tree)</span><br><span class="line">        m = <span class="built_in">str</span>(label(tree))</span><br><span class="line">        print_parts(left, partition + [m])</span><br><span class="line">        print_parts(right, partition)</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    &gt;&gt;&gt; print_parts(partition_tree(6, 4))</span></span><br><span class="line"><span class="string">    4 + 2</span></span><br><span class="line"><span class="string">    4 + 1 + 1</span></span><br><span class="line"><span class="string">    3 + 3</span></span><br><span class="line"><span class="string">    3 + 2 + 1</span></span><br><span class="line"><span class="string">    3 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    2 + 2 + 2</span></span><br><span class="line"><span class="string">    2 + 2 + 1 + 1</span></span><br><span class="line"><span class="string">    2 + 1 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    1 + 1 + 1 + 1 + 1 + 1</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<p>除了%和values必须以外，其他都是选填</p>
+<p><code>key</code>: 映射的键，由带括号的字符序列组成，一般用于后面的values是是字典的场景</p>
+<p><code>flags</code>: 转换标志，会影响某些转换类型的结果</p>
+<p>​	</p>
+<table>
+<thead>
+<tr>
+<th>flags</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>0</code></td>
+<td>数值的转换将被零填充，需搭配<code>width</code>使用</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>转化结果左对齐，需搭配<code>width</code>使用，该标志符会覆盖<code>0</code>标志符</td>
+</tr>
+<tr>
+<td><code> </code></td>
+<td>空格，在带符号的转换产生的正数（或空字符串）, 之前留一个空格(方便正负数最后对齐)</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>转换数字后，数字前面将会展示其正负号（“+”或“-”）, 该标志符会覆盖<code> </code>(空格)标志符</td>
+</tr>
+</tbody></table>
+<p><code>width</code>: 最小字段宽度。如果指定为”*”，则实际宽度从值中元组的下一个元素读取，要转换的对象位于最小字段宽度和可选精度之后。</p>
+<p><code>.precision</code>: 精度，格式为“点+精度”，如果指定为”*“，则实际宽度从值中元组的下一个元素读取，要转换的值位于精度之后。</p>
+<p><code>length type</code>: 长度修改器</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#示例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%f&#x27;</span> % <span class="number">3.14</span></span><br><span class="line"><span class="string">&#x27;3.140000&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%.4f&#x27;</span> % <span class="number">3.14</span></span><br><span class="line"><span class="string">&#x27;3.1400&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;%(name)s  %(age)s&quot;</span> % &#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;Lihua&quot;</span>, <span class="string">&quot;age&quot;</span>: <span class="number">20</span>&#125;</span><br><span class="line"><span class="string">&#x27;Lihua  20&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&quot;% d  \n%+d&quot;</span> % (<span class="number">1234</span>, <span class="number">1234</span>))</span><br><span class="line"> <span class="number">1234</span></span><br><span class="line">+<span class="number">1234</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(<span class="string">&quot;% d  \n%+d&quot;</span> % (-<span class="number">1234</span>, <span class="number">1234</span>))</span><br><span class="line">-<span class="number">1234</span></span><br><span class="line">+<span class="number">1234</span></span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&#x27;%4d,%06d,%010f&#x27;</span> % (<span class="number">12</span>, <span class="number">1234</span>, <span class="number">3.14</span>)</span><br><span class="line"><span class="string">&#x27;  12,001234,003.140000&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;%0-4d,%0-6d,%0-10f&quot;</span> % (<span class="number">12</span>, <span class="number">1234</span>, <span class="number">3.14</span>)  <span class="comment"># &#x27;-&#x27; flag will override &#x27;0&#x27; flag</span></span><br><span class="line"><span class="string">&#x27;12  ,1234  ,3.140000  &#x27;</span></span><br></pre></td></tr></table></figure>
 
-<p>例二：转换为二叉树的一种方式</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">right_binarize</span>(<span class="params">tree</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Construct a right-branching binary tree.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">if</span> is_leaf(tree):</span><br><span class="line">        <span class="keyword">return</span> tree</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">len</span>(tree) &gt; <span class="number">2</span>:</span><br><span class="line">        tree = [tree[<span class="number">0</span>], tree[<span class="number">1</span>:]]</span><br><span class="line">    <span class="keyword">return</span> [right_binarize(b) <span class="keyword">for</span> b <span class="keyword">in</span> tree]</span><br><span class="line">	<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">	&gt;&gt;&gt; right_binarize([1, 2, 3, 4, 5, 6, 7])</span></span><br><span class="line"><span class="string">	[1, [2, [3, [4, [5, [6, 7]]]]]]</span></span><br><span class="line"><span class="string">	&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="链表（linked-list）"><a href="#链表（linked-list）" class="headerlink" title="链表（linked list）"></a>链表（linked list）</h3><blockquote>
-<p>例：four &#x3D; [1, [2, [3, [4, ‘empty’]]]]      列表第一项是内容，第二项指向下一个元素</p>
+
+<h4 id="2-format"><a href="#2-format" class="headerlink" title="2. format"></a>2. format</h4><blockquote>
+<p>“…{}”.format(..)</p>
+<p>“… {[field_name][!conversion][:format_spec]} …”.format(arguments)</p>
 </blockquote>
-<p>实现：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">empty = <span class="string">&#x27;empty&#x27;</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">is_link</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;s is a linked list if it is empty or a (first, rest) pair.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s == empty <span class="keyword">or</span> (<span class="built_in">len</span>(s) == <span class="number">2</span> <span class="keyword">and</span> is_link(s[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">link</span>(<span class="params">first, rest</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Construct a linked list from its first element and the rest.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(rest), <span class="string">&quot;rest must be a linked list.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> [first, rest]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">first</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the first element of a linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(s), <span class="string">&quot;first only applies to linked lists.&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> s != empty, <span class="string">&quot;empty linked list has no first element.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">rest</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the rest of the elements of a linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> is_link(s), <span class="string">&quot;rest only applies to linked lists.&quot;</span></span><br><span class="line">    <span class="keyword">assert</span> s != empty, <span class="string">&quot;empty linked list has no rest.&quot;</span></span><br><span class="line">    <span class="keyword">return</span> s[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">len_link</span>(<span class="params">s</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the length of linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    length = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> s != empty:</span><br><span class="line">        s, length = rest(s), length + <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> length</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">getitem_link</span>(<span class="params">s, i</span>):</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Return the element at index i of linked list s.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">while</span> i &gt; <span class="number">0</span>:</span><br><span class="line">        s, i = rest(s), i - <span class="number">1</span></span><br><span class="line">    <span class="keyword">return</span> first(s)</span><br></pre></td></tr></table></figure>
+<p><code>arguments</code>两种使用方式，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; &quot;&#123;&#125; &#123;&#125;&quot;.format(&quot;Li hua&quot;, 24)</span><br><span class="line">&#x27;Li hua 24&#x27;</span><br><span class="line">&gt;&gt;&gt; &quot;&#123;0&#125; &#123;1&#125; &#123;1&#125; &#123;0&#125;&quot;.format(&quot;Li hua&quot;, 24)</span><br><span class="line">&#x27;Li hua 24 24 Li hua&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; &quot;&#123;name&#125; &#123;age&#125;&quot;.format(name=&quot;Li hua&quot;, age=24)</span><br><span class="line">&#x27;Li hua 24&#x27;</span><br><span class="line">&gt;&gt;&gt; &quot;&#123;name&#125; &#123;age&#125; &#123;age&#125; &#123;name&#125;&quot;.format(&quot;Li hua&quot;, 24)</span><br><span class="line">&#x27;Li hua 24 24 Li hua&#x27;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; &quot;&#123;0[name]&#125; &#123;0[age]&#125;, &#123;1[0]&#125; &#123;1[1]&#125;&quot;.format(&#123;&quot;name&quot;: &quot;Li hua&quot;, &quot;age&quot;: 24&#125;, [&quot;Zhang san&quot;,24])</span><br><span class="line">&#x27;Li hua 24, Zhang san 24&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><code>field_name</code>指明对应arguments哪一个</p>
+<p><code>conversion</code>: 选填。用！开头，有三个值可选：</p>
+<table>
+<thead>
+<tr>
+<th>conversion</th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>s</code></td>
+<td>调用结果对象的<code>str</code>方法进行转换</td>
+</tr>
+<tr>
+<td><code>r</code></td>
+<td>调用结果对象的<code>repr</code>方法进行转换</td>
+</tr>
+<tr>
+<td><code>a</code></td>
+<td>调用结果对象的<code>ascii</code>方法进行转换</td>
+</tr>
+</tbody></table>
+<p><code>format_spec</code>: 选填。：开头。格式化具体规范，<strong>常用</strong></p>
+<p>完整语法为：[[fill]align][sign][#][0][width][grouping_option][.precision][type]    所有字段均为选填</p>
+<ul>
+<li><p><code>fill</code>： 填充内容，如果指定了宽度，但变量长度不够，会使用该字段值进行填充。设置了fill，后面必须显式设置align。</p>
+</li>
+<li><p><code>align</code>: 对齐方式，有以下值：</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>align</code></th>
+<th>explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&lt;</code></td>
+<td>强制左对齐（绝大多数对象默认使用）</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>强制右对齐（数字类型默认使用）</td>
+</tr>
+<tr>
+<td><code>=</code></td>
+<td>强制将填充内容放在符号(如果有)之后但数字之前，比如输出成<code>+000000120</code>这样的格式。此对齐选项仅对数字类型有效。(当’0’紧接在字段宽度<code>width</code>之前时，它将成为默认值。)</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>强制居中对齐</td>
+</tr>
+</tbody></table>
+<ul>
+<li><code>sign</code>: 符号展现格式，仅对数字类型有效。有以下值：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th><code>sign</code></th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>正数负数都展现符号，正数用+，负数用-。</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>（默认值），仅负数展现符号。</td>
+</tr>
+<tr>
+<td>&#96;&#96;</td>
+<td>负数展现符号，正数前面使用一个空格来占位对齐。</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><code>0</code>: 当没有设置对齐方式<code>align</code>时, 在宽度字段前面加一个零(‘0’)字符，将等价于填充字符<code>fill</code>为<code>0</code>且对齐方式<code>align</code>为<code>&lt;</code>。</p>
+</li>
+<li><p><code>width</code>: 最小字段宽度，不设置则字段宽度将始终与填充它的数据长度相同（此时对齐方式<code>align</code>没有意义）。</p>
+</li>
+<li><p><code>grouping_option</code>: 可选”,”(逗号)，表示使用逗号作为千位分隔符</p>
+</li>
+<li><p><code>.precision</code>: 用法同上</p>
+</li>
+<li><p><code>type</code>: 数据类型，有s, d, f 同上</p>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#示例</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;:4&#125;&#123;:6&#125;,&#123;:10&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="number">3.14</span>)  <span class="comment"># set width</span></span><br><span class="line"><span class="string">&#x27;1   2     ,      3.14&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;:4&#125;&#123;:&gt;6&#125;, &#123;:^10&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="number">3.14</span>)  <span class="comment"># set width, align</span></span><br><span class="line"><span class="string">&#x27;1        2,    3.14   &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;:_&lt;4&#125;&#123;:0&gt;6&#125;, &#123;:^10&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="number">3.14</span>)  <span class="comment"># set width, align, fill</span></span><br><span class="line"><span class="string">&#x27;1___000002,    3.14   &#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="string">&quot;&#123;:_&lt;4&#125;&#123;:0&gt;6&#125;, &#123;:^10.4f&#125;&quot;</span>.<span class="built_in">format</span>(<span class="string">&quot;1&quot;</span>, <span class="string">&quot;2&quot;</span>, <span class="number">3.14</span>)  <span class="comment"># set width, align, fill, precision, type</span></span><br><span class="line"><span class="string">&#x27;1___000002,   3.1400  &#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="f表达式"><a href="#f表达式" class="headerlink" title="f表达式"></a>f表达式</h4><p><code>=</code>: 选填。在表达式后添加等号’&#x3D;’, 可以显示表达式文本及其求值后的值(在调试中很有用)</p>
+<p><code>conversion</code>: 选填。指定时要在开头添加<code>!</code>，指定后对表达式求值的结果在格式化之前进行转换，可选s, r, a，用法同上</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 示例</span><br><span class="line">&gt;&gt;&gt; name = &quot;Mike&quot;</span><br><span class="line">&gt;&gt;&gt; age = 12</span><br><span class="line">&gt;&gt;&gt; print(f&#x27;&#123;name&#125; is &#123;age&#125; years old&#x27;)</span><br><span class="line">Mike is 12 years old</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; f&quot;His name is &#123;name!r&#125;.&quot;</span><br><span class="line">&quot;His name is &#x27;Mike&#x27;.&quot;</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; line = &quot;The output will have the expression text&quot;</span><br><span class="line">&gt;&gt;&gt; f&quot;&#123;line = &#125;&quot;  # use &quot;=&quot; sign, require python 3.8 or above</span><br><span class="line">&#x27;line = &quot;The output will have the expression text&quot;&#x27;</span><br></pre></td></tr></table></figure>
 
 
                 
@@ -109,7 +233,7 @@
     <div class="suffix-box-right">
         <span class="suffix-box-title">文章作者：</span>ZYXenon
         <br>
-        <span class="suffix-box-title">文章出处：</span><a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/" target="_blank">树和链表的python实现</a>
+        <span class="suffix-box-title">文章出处：</span><a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/" target="_blank">格式化输出</a>
         <br>
         <span class="suffix-box-title">作者签名：</span>简单地活着, 肆意又精彩.
         <br>
@@ -122,20 +246,10 @@
 </div>
                 
                 
-                    <div class="tag">
-                        标签：
-                        
-                            <a href="/tags/%E7%BC%96%E7%A8%8B/">编程</a>
-                        
-                    </div>
-                
                 <div class="article-prev-next">
                     
-                        <a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/" class="prev-prefix">« </a> 上一篇：    <a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/" title="发布于 2025-01-31 07:56">格式化输出</a>
-                        <br>
                     
-                    
-                        <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" class="next-prefix">» </a> 下一篇：    <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/" title="发布于 2025-01-13 02:01">数据抽象</a>
+                        <a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/" class="next-prefix">» </a> 下一篇：    <a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/" title="发布于 2025-01-17 09:21">树和链表的python实现</a>
                     
                 </div>
             </div>
