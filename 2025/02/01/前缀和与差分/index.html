@@ -9,7 +9,7 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <title>
         
-            Hexo
+            前缀和与差分
         
     </title>
     <link rel="shortcut icon" href="#"/>
@@ -32,179 +32,110 @@
 <meta name="generator" content="Hexo 7.3.0"></head>
 <body>
     <a id="cover"></a>
-    <link type="text/css" rel="stylesheet" href="/css/index.css">
-<div id="count"></div>
-<div id="header" >
+    <link type="text/css" rel="stylesheet" href="/css/post.css">
+<div id="header" class="header">
     <div class="vertical">
         <div class="inner">
             
-                <h1 class="header-title">ZYXenon</h1>
-                <h2 class="header-description" id="hitokoto"></h2>
-                <h3 class="header-info" id="hitokotoAuthor"></h3>
+                <h1 class="header-subtitle">前缀和与差分</h1>
+                <div class="header-subinfo">
+                    <p class="article-info-text">
+                        <span>
+                            <i class="iconfont icon-time"></i> 发表时间：2025-02-01
+                        </span>
+                        
+                            
+                                <span id="/2025/02/01/前缀和与差分/" class="leancloud_visitors" data-flag-title="前缀和与差分">
+                                    <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
+                                </span>
+                            
+                            
+                                <span>
+                                    <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/02/01/前缀和与差分/"></span>
+                                </span>
+                              
+                        
+                    </p>
+                    
+                    
+                </div>
             
         </div>
     </div>
     
-        <a class="scroll-down" href="javascript:;" target="_self" data-offset="-45">
-            <i class="scroll-down-icon iconfont icon-return"></i>
-        </a>
-    
 </div>
 <div id="container">
     
-        
-            <!-- 首页 -->
-            <div class="articles">
+        <!-- 文章页面 -->
+        <div id="article">
+            <div class="toc"></div>
+            <div class="article-body">
+                <h2 id="前缀和与差分"><a href="#前缀和与差分" class="headerlink" title="前缀和与差分"></a>前缀和与差分</h2><p>前缀和就是序列的前n项和，差分相当于前缀和的逆运算</p>
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>常用于求一个序列某个区间的和</p>
+<p>一维情况下，假设序列长度为n，进行m次查询，若用for循环遍历区间求和，则复杂度为O(n*m)，而前缀和方法复杂度为O(n+m)，每次查询复杂度为O(1)。</p>
+<p>二维情况下，for循环复杂度为O(n^2)，前缀和方法复杂度为预处理O(mn)，查询O(1)</p>
+<p>一种实现如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一维情况</span></span><br><span class="line"><span class="comment"># 创建前缀和数组</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">prefix_sum</span>(<span class="params">arr</span>):	</span><br><span class="line">    prefix = [<span class="number">0</span>] * (<span class="built_in">len</span>(arr) + <span class="number">1</span>)	</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="built_in">len</span>(arr) + <span class="number">1</span>):</span><br><span class="line">        prefix[i] = prefix[i - <span class="number">1</span>] + arr[i - <span class="number">1</span>]</span><br><span class="line">    <span class="keyword">return</span> prefix	<span class="comment"># 注意这里前缀和数组索引从1开始</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 查询区间[l, r] 的和</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">range_sum</span>(<span class="params">prefix, l, r</span>):</span><br><span class="line">    <span class="keyword">return</span> prefix[r] - prefix[l - <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 二维情况（矩阵）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">prefix_sum_2d</span>(<span class="params">matrix</span>):</span><br><span class="line">    rows = <span class="built_in">len</span>(matrix)</span><br><span class="line">    cols = <span class="built_in">len</span>(matrix[<span class="number">0</span>]) <span class="keyword">if</span> rows &gt; <span class="number">0</span> <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    prefix = [[<span class="number">0</span>] * (cols + <span class="number">1</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(rows + <span class="number">1</span>)]</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, rows + <span class="number">1</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, cols + <span class="number">1</span>):</span><br><span class="line">            prefix[i][j] = (matrix[i - <span class="number">1</span>][j - <span class="number">1</span>] +</span><br><span class="line">                            prefix[i - <span class="number">1</span>][j] +</span><br><span class="line">                            prefix[i][j - <span class="number">1</span>] -</span><br><span class="line">                            prefix[i - <span class="number">1</span>][j - <span class="number">1</span>])</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> prefix</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">range_sum_2d</span>(<span class="params">prefix, x1, y1, x2, y2</span>):</span><br><span class="line">    <span class="comment"># 查询子矩阵 (x1, y1) 到 (x2, y2) 的和</span></span><br><span class="line">    <span class="keyword">return</span> (prefix[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] - prefix[x1][y2 + <span class="number">1</span>] - </span><br><span class="line">            prefix[x2 + <span class="number">1</span>][y1] + prefix[x1][y1])</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>下图方便理解</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/8b538feb08981caf3a525fc3fda14273.png" alt="在这里插入图片描述"></p>
+<h2 id="差分"><a href="#差分" class="headerlink" title="差分"></a>差分</h2><p>常用于让序列某个区间每个数加一个常数</p>
+<p>暴力做法复杂度为O(n)，</p>
+<p>差分做法：构造差分序列b，使得a序列是b的前缀和。<code>b[n] = a[n] - a[n-1]</code></p>
+<p>此时要给a数组的[l, r]区间每个数加上c，只需对差分数组b做<code>b[l] += c, b[r+1] -= c</code></p>
+<p>下图方便理解</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/7ed7d541bea164f6695e82e6ed0679b7.png" alt="在这里插入图片描述"></p>
+<p>二维情况：</p>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/df1ea9b38f8b698cf9663fb30c1bf7f1.png" alt="img"></p>
+<p>构造差分矩阵</p>
+<p>[法一] <code>b[i][j] = a[i][j] − a[i − 1][j] − a[i][j − 1] + a[i −1 ][j − 1]</code></p>
+<p>[法二]</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">insert</span>(<span class="params">b, x1, y1, x2, y2, c</span>):</span><br><span class="line">	b[x1][y1] += c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y1] -= c;</span><br><span class="line">    b[x1][y2 + <span class="number">1</span>] -= c;</span><br><span class="line">    b[x2 + <span class="number">1</span>][y2 + <span class="number">1</span>] += c;</span><br><span class="line">    <span class="comment"># 必要时可以加上判断，是否超出界限</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 构建差分矩阵</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">len</span>(arr):</span><br><span class="line">	<span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">len</span>(arr[<span class="number">0</span>]):</span><br><span class="line">		insert(b, i, j, i, j, a[i][j])</span><br></pre></td></tr></table></figure>
+
+
                 
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2025/02/01/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/">前缀和与差分</a>
-                            
-                        </div>
-                        <div class="article-abstract">
-                            
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
-                            <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2025-02-01
-                            </span>
-                            
-                                
-                                    <span id="/2025/02/01/前缀和与差分/" class="leancloud_visitors" data-flag-title="前缀和与差分">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
-                                    <span>
-                                        <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/02/01/前缀和与差分/"></span>
-                                    </span>
-                                
-                            
-                        </div>
-                        <div class="clear"></div>     
-                    </div>
+                <p class="end">__END__</p>
+            </div>
+            <div class="article-footer">
+                <div class="suffix-box">
+    <div class="suffix-box-left">
+        <img src="/image/sidebar/logo.jpg" alt="ZYXenon">
+    </div>
+    <div class="suffix-box-right">
+        <span class="suffix-box-title">文章作者：</span>ZYXenon
+        <br>
+        <span class="suffix-box-title">文章出处：</span><a href="/2025/02/01/%E5%89%8D%E7%BC%80%E5%92%8C%E4%B8%8E%E5%B7%AE%E5%88%86/" target="_blank">前缀和与差分</a>
+        <br>
+        <span class="suffix-box-title">作者签名：</span>简单地活着, 肆意又精彩.
+        <br>
+        <span class="suffix-box-title">关于主题：</span><a href="https://github.com/first19326/Hexo-LiveForCode" target="_blank">Hexo - Live For Code</a>
+        <br>
+        <span class="suffix-box-title">版权声明：</span>文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" title="BY-NC-SA" target="_blank">BY-NC-SA</a> 许可协议，转载请注明出处
+        <br>
+    </div>
+    <div style="clear: both;"></div>
+</div>
                 
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/">格式化输出</a>
-                            
-                        </div>
-                        <div class="article-abstract">
-                            
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
-                            <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2025-01-31
-                            </span>
-                            
-                                
-                                    <span id="/2025/01/31/格式化输出/" class="leancloud_visitors" data-flag-title="格式化输出">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
-                                    <span>
-                                        <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/31/格式化输出/"></span>
-                                    </span>
-                                
-                            
-                        </div>
-                        <div class="clear"></div>     
-                    </div>
                 
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2025/01/17/%E6%A0%91%E5%92%8C%E9%93%BE%E8%A1%A8%E7%9A%84python%E5%AE%9E%E7%8E%B0/">树和链表的python实现</a>
-                            
-                        </div>
-                        <div class="article-abstract">
-                            
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
-                            <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2025-01-17
-                            </span>
-                            
-                                
-                                    <span id="/2025/01/17/树和链表的python实现/" class="leancloud_visitors" data-flag-title="树和链表的python实现">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
-                                    <span>
-                                        <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/17/树和链表的python实现/"></span>
-                                    </span>
-                                
-                            
-                        </div>
-                        <div class="clear"></div>     
-                    </div>
-                
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2025/01/13/%E6%95%B0%E6%8D%AE%E6%8A%BD%E8%B1%A1/">数据抽象</a>
-                            
-                        </div>
-                        <div class="article-abstract">
-                            
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
-                            <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2025-01-13
-                            </span>
-                            
-                                
-                                    <span id="/2025/01/13/数据抽象/" class="leancloud_visitors" data-flag-title="数据抽象">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
-                                    <span>
-                                        <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/13/数据抽象/"></span>
-                                    </span>
-                                
-                            
-                        </div>
-                        <div class="clear"></div>     
-                    </div>
-                
-                    <div class="article">
-                        <div class="article-title">
-                            <a href="/2025/01/12/%E9%80%92%E5%BD%92/">递归</a>
-                            
-                        </div>
-                        <div class="article-abstract">
-                            
-                        </div>
-                        <div class="clear"></div>
-                        <div class="article-info">
-                            <span>
-                                <i class="iconfont icon-time"></i> 发表时间：2025-01-12
-                            </span>
-                            
-                                
-                                    <span id="/2025/01/12/递归/" class="leancloud_visitors" data-flag-title="递归">
-                                        <i class="iconfont icon-browse"></i> 阅读：<sapn class="leancloud-visitors-count"></span>
-                                    </span>
-                                
-                                
-                                    <span>
-                                        <i class="iconfont icon-interactive"></i> 评论：<span class="valine-comment-count" data-xid="/2025/01/12/递归/"></span>
-                                    </span>
-                                
-                            
-                        </div>
-                        <div class="clear"></div>     
-                    </div>
-                
+                <div class="article-prev-next">
+                    
+                    
+                        <a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/" class="next-prefix">» </a> 下一篇：    <a href="/2025/01/31/%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA/" title="发布于 2025-01-31 07:56">格式化输出</a>
+                    
+                </div>
             </div>
             
-            
+    <div class="article-comments">
         
+            <div class="comments-title">
+                评论列表
+            </div>
+        
+        <div class="comments-content"></div>
+    </div>
+    
+ 
+        </div>
     
 </div>
     <div id="footer">
@@ -236,7 +167,7 @@
             <div class="menu-list">
                 <ul>
                     
-                        <li class=" active "><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
+                        <li class=""><a href="/" class="" target="_self"><span class="iconfont icon-home-fill"></span>首页</a></li>
                     
                         <li class=""><a href="/category" class="" target="_self"><span class="iconfont icon-folder-fill"></span>分类</a></li>
                     
